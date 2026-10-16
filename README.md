@@ -14,7 +14,8 @@ The author used it to find and collect **$76 spread over 940 forgotten wallets**
 
 ![Overview](docs/screenshots/overview.png)
 
-> The interface is in Russian. Screenshots show demo data (public Hardhat test wallets), not real users.
+> The interface is in **English and Russian** — switch with the EN/RU button in the header (or open `http://127.0.0.1:4777/?lang=en`).
+> Screenshots show demo data (public Hardhat test wallets), not real users.
 
 ## Why it's safe to paste seed phrases here
 
@@ -38,25 +39,24 @@ The author used it to find and collect **$76 spread over 940 forgotten wallets**
 4. Get a free **Alchemy API key** (balances and history come from Alchemy):
    1. Sign up at [dashboard.alchemy.com](https://dashboard.alchemy.com) — the free plan is enough.
    2. *Apps → Create new app*, any name. Enable the networks you need (or all EVM ones).
-   3. Copy the **API Key** and paste it in the panel: **Настройки (Settings) → Alchemy API key → Сохранить**.
+   3. Copy the **API Key** and paste it in the panel: **Settings → Alchemy API key → Save**.
       The panel checks which networks the key can read and switches off the rest.
-5. **Добавить (Add)** → paste addresses (one per line, optional label) or seed phrases / private keys
+5. **Add** → paste addresses (one per line, optional label) or seed phrases / private keys
    (one per line; choose how many accounts per seed and the derivation path: MetaMask/Rabby, Ledger Live, Legacy).
-6. Press **Сканировать все (Scan all)**. 1,000 wallets take about 3 minutes.
+6. Press **Scan all**. 1,000 wallets take about 3 minutes.
 
-Want to look around first without a key? `node docs/demo/make-demo.mjs && node docs/demo/run-demo.mjs`
-opens the panel with demo data on http://127.0.0.1:4779.
+Want to look around first without a key? `npm run demo` opens the panel with demo data on http://127.0.0.1:4779/?lang=en.
 
 ## Tabs
 
 | Tab | What it does |
 |---|---|
-| **Обзор** (Overview) | Total value, value by network and by token, richest wallets, "needs gas" list, scan errors. |
-| **Кошельки** (Wallets) | Table with filters (group, network, non-empty, needs gas), per-network token details, explorer + DeBank links, CSV export, rescan errors, bulk delete. |
-| **Добавить** (Add) | Addresses, seed phrases, private keys, `.txt` upload. Duplicates are skipped automatically, including a seed imported earlier — recognised by its addresses, the phrase itself is never stored. |
-| **Активность** (Activity) | Ranks wallets by real on-chain use in 11 networks: DEX swaps, transfers to outside addresses, contract calls, Polymarket. Ignores address-poisoning spam and transfers between your own wallets. A "5 for today" list with done-marks helps when a site lets you add only a few wallets per day. |
-| **Сборщик** (Sweeper) | Collects leftovers to one address: live dry-run plan with gas per transaction, "gas bus" (a wallet with spare native coin funds gas for token-only wallets when it pays off), reconciliation with the panel total, confirmation dialog, per-tx status and CSV log. Details: [docs/SWEEPER.ru.md](docs/SWEEPER.ru.md). |
-| **Настройки** (Settings) | API key, networks, dust threshold, hidden tokens, "start from scratch". |
+| **Overview** | Total value, value by network and by token, richest wallets, "needs gas" list, scan errors. |
+| **Wallets** | Table with filters (group, network, non-empty, needs gas), per-network token details, explorer + DeBank links, CSV export, rescan errors, bulk delete. |
+| **Add** | Addresses, seed phrases, private keys, `.txt` upload. Duplicates are skipped automatically, including a seed imported earlier — recognised by its addresses, the phrase itself is never stored. |
+| **Activity** | Ranks wallets by real on-chain use in 11 networks: DEX swaps, transfers to outside addresses, contract calls, Polymarket. Ignores address-poisoning spam and transfers between your own wallets. A "5 for today" list with done-marks helps when a site lets you add only a few wallets per day. |
+| **Sweeper** | Collects leftovers to one address: live dry-run plan with gas per transaction, "gas bus" (a wallet with spare native coin funds gas for token-only wallets when it pays off), reconciliation with the panel total, confirmation dialog, per-tx status and CSV log. Technical details (in Russian): [docs/SWEEPER.ru.md](docs/SWEEPER.ru.md). |
+| **Settings** | API key, networks, dust threshold, hidden tokens, "start from scratch". |
 
 ![Wallets](docs/screenshots/wallets.png)
 ![Activity](docs/screenshots/activity.png)
@@ -75,7 +75,7 @@ All in `data/` next to the code (git-ignored):
 - `wallets.json` — addresses, labels, groups;
 - `scan.json`, `activity.json` — last scan results.
 
-"Start from scratch" in Settings clears wallets and results; delete the folder to remove everything.
+“Start from scratch” in Settings clears wallets and results; delete the folder to remove everything.
 
 ## Good to know
 
@@ -87,7 +87,7 @@ All in `data/` next to the code (git-ignored):
 ## Testing without real money
 
 `testchain/` has a local Hardhat setup (EIP-1559, legacy and OP-stack chains) with public test mnemonics to run the
-sweeper end to end. See [docs/SWEEPER.ru.md](docs/SWEEPER.ru.md#тестирование-на-локальных-сетях-без-реальных-денег).
+sweeper end to end. See (in Russian) [docs/SWEEPER.ru.md](docs/SWEEPER.ru.md#тестирование-на-локальных-сетях-без-реальных-денег).
 
 ## License
 

@@ -1,13 +1,16 @@
 // Builds a fake dataset for screenshots / trying the UI without an API key.
 // Wallets come from the public Hardhat test mnemonic — never real funds, never real users.
-//   node docs/demo/make-demo.mjs   →  docs/demo/data/*.json
-//   node docs/demo/run-demo.mjs    →  panel with this data on http://127.0.0.1:4779
+//   node docs/demo/make-demo.mjs [en]   →  docs/demo/data/*.json (or data-en/ with English names)
+//   node docs/demo/run-demo.mjs [en]    →  panel with this data on http://127.0.0.1:4779
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { HDNodeWallet, Mnemonic } from 'ethers';
 
-const DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), 'data');
+const LANG = process.argv[2] === 'en' ? 'en' : 'ru';
+const DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), LANG === 'en' ? 'data-en' : 'data');
+const SEED = LANG === 'en' ? 'Seed' : 'Сид';
+const ACC = LANG === 'en' ? 'Acc' : 'Акк';
 const PHRASE = 'test test test test test test test test test test test junk';
 const root = HDNodeWallet.fromSeed(Mnemonic.fromPhrase(PHRASE).computeSeed());
 
@@ -20,7 +23,7 @@ let id = 1;
 for (let s = 1; s <= 5; s++) {
   for (let a = 0; a < 5; a++) {
     const p = `m/44'/60'/0'/0/${(s - 1) * 5 + a}`;
-    wallets.push({ id: id++, address: root.derivePath(p).address, label: `Акк ${a + 1}`, group: `Сид ${s}`, source: `seed «Сид ${s}» ${p}`, addedAt: now });
+    wallets.push({ id: id++, address: root.derivePath(p).address, label: `${ACC} ${a + 1}`, group: `${SEED} ${s}`, source: `seed «${SEED} ${s}» ${p}`, addedAt: now });
   }
 }
 

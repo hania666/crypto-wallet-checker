@@ -2,6 +2,7 @@ import { NETWORKS, NETWORK_BY_ID, networkName, explorerAddressUrl } from './netw
 import { parseSecretLines, deriveAddresses } from './seeds.js';
 import { mountSweep } from './sweep-ui.js';
 import { mountActivity } from './activity-ui.js';
+import { tt, tr, LANG, LOCALE, translateDom, setLang } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -81,15 +82,15 @@ function price(p) {
 const shortAddr = (a) => `${a.slice(0, 6)}…${a.slice(-4)}`;
 const sum = (arr, f) => arr.reduce((s, x) => s + (f(x) || 0), 0);
 function ago(iso) {
-  if (!iso) return 'ещё не было';
+  if (!iso) return tt("ещё не было");
   const s = (Date.now() - new Date(iso).getTime()) / 1000;
-  if (s < 60) return 'только что';
-  if (s < 3600) return `${Math.floor(s / 60)} мин назад`;
-  if (s < 86400) return `${Math.floor(s / 3600)} ч назад`;
-  return `${Math.floor(s / 86400)} дн назад`;
+  if (s < 60) return tt("только что");
+  if (s < 3600) return tt("{0} мин назад", [Math.floor(s / 60)]);
+  if (s < 86400) return tt("{0} ч назад", [Math.floor(s / 3600)]);
+  return tt("{0} дн назад", [Math.floor(s / 86400)]);
 }
-const fmtDate = (iso) => (iso ? new Date(iso).toLocaleString('ru-RU') : '');
-const walletName = (w) => w.label || `Кошелёк ${w.id}`;
+const fmtDate = (iso) => (iso ? new Date(iso).toLocaleString(LOCALE) : '');
+const walletName = (w) => w.label || tt("Кошелёк {0}", [w.id]);
 
 let toastTimer;
 function toast(msg, ms = 3500) {
@@ -103,7 +104,7 @@ async function guarded(fn) {
   try {
     await fn();
   } catch (e) {
-    toast('Ошибка: ' + e.message, 6000);
+    toast(tt("Ошибка: ") + tr(e.message), 6000);
   }
 }
 
@@ -185,8 +186,8 @@ async function pollJob() {
     pollTimer = setTimeout(pollJob, 1000);
   } else {
     await loadState();
-    if (S.job.aborted) toast('Скан остановлен: ' + (S.job.lastError || 'ошибка ключа'), 8000);
-    else toast(`Скан завершён${S.job.failed ? `, с ошибками: ${S.job.failed}` : ''}`);
+    if (S.job.aborted) toast(tt("Скан остановлен: ") + (tr(S.job.lastError) || tt("ошибка ключа")), 8000);
+    else toast(tt("Скан завершён{0}", [S.job.failed ? tt(", с ошибками: {0}", [S.job.failed]) : '']));
   }
 }
 
@@ -208,9 +209,9 @@ function renderProgress() {
   if (running) {
     const pct = j.total ? Math.round((j.done / j.total) * 100) : 0;
     $('progressFill').style.width = `${pct}%`;
-    $('progressText').textContent = `Сканирую… ${j.done} / ${j.total} запросов (${pct}%)${j.failed ? ` · ошибок: ${j.failed}` : ''}`;
+    $('progressText').textContent = tt("Сканирую… {0} / {1} запросов ({2}%){3}", [j.done, j.total, pct, j.failed ? tt(" · ошибок: {0}", [j.failed]) : '']);
   }
-  $('scanInfo').textContent = running ? '' : `Последний скан: ${ago(S.scan.scannedAt)}`;
+  $('scanInfo').textContent = running ? '' : tt("Последний скан: {0}", [ago(S.scan.scannedAt)]);
 }
 
 // ---------- rendering ----------
@@ -231,13 +232,13 @@ function renderBanner() {
   const b = $('banner');
   b.replaceChildren();
   if (!S.config.hasKey) {
-    b.append(h('div', { class: 'banner warn' }, '⚠ Не задан Alchemy API key — без него скан не работает.',
-      h('button', { onclick: () => switchTab('settings') }, 'Открыть настройки')));
+    b.append(h('div', { class: 'banner warn' }, tt("⚠ Не задан Alchemy API key — без него скан не работает."),
+      h('button', { onclick: () => switchTab('settings') }, tt("Открыть настройки"))));
   } else if (S.job?.aborted && !S.job.running) {
-    b.append(h('div', { class: 'banner crit' }, '✕ Последний скан остановлен: ', S.job.lastError || ''));
+    b.append(h('div', { class: 'banner crit' }, tt("✕ Последний скан остановлен: "), tr(S.job.lastError) || ''));
   } else if (!S.wallets.length) {
-    b.append(h('div', { class: 'banner warn' }, 'Список кошельков пуст.',
-      h('button', { onclick: () => switchTab('add') }, 'Добавить адреса или сиды')));
+    b.append(h('div', { class: 'banner warn' }, tt("Список кошельков пуст."),
+      h('button', { onclick: () => switchTab('add') }, tt("Добавить адреса или сиды"))));
   }
 }
 
@@ -301,7 +302,7 @@ function kpi(label, value, sub, cls = '') {
 function barList(container, rows, { onClick, limit = 14 }) {
   container.replaceChildren();
   if (!rows.length) {
-    container.append(h('div', { class: 'd-empty', text: 'Пока нет данных — запусти скан.' }));
+    container.append(h('div', { class: 'd-empty', text: tt("Пока нет данных — запусти скан.") }));
     return;
   }
   const max = rows[0].value || 1;
@@ -313,14 +314,14 @@ function barList(container, rows, { onClick, limit = 14 }) {
       h('div', { class: 'bl-name', text: r.name }),
       h('div', { class: 'bl-track' }, h('div', { class: 'bl-fill', style: `width:${pct}%` })),
       h('div', { class: 'bl-val', text: usdShort(r.value) }));
-    row.addEventListener('mousemove', (e) => showTip(e, r.name, [usd(r.value), `${((r.value / total) * 100).toFixed(1)}% от всего`, ...(r.extra ?? [])]));
+    row.addEventListener('mousemove', (e) => showTip(e, r.name, [usd(r.value), tt("{0}% от всего", [((r.value / total) * 100).toFixed(1)]), ...(r.extra ?? [])]));
     row.addEventListener('mouseleave', hideTip);
     if (onClick) row.addEventListener('click', () => { hideTip(); onClick(r); });
     container.append(row);
   }
   if (rows.length > limit) {
     const rest = rows.slice(limit);
-    container.append(h('div', { class: 'bl-more', text: `+ ещё ${rest.length} на ${usd(sum(rest, (r) => r.value))}` }));
+    container.append(h('div', { class: 'bl-more', text: tt("+ ещё {0} на {1}", [rest.length, usd(sum(rest, (r) => r.value))]) }));
   }
 }
 
@@ -340,18 +341,18 @@ function renderOverview() {
   const unscanned = S.wallets.length - a.scanned;
   const netsWithMoney = [...a.byNet.values()].filter((x) => x.value >= dust).length;
   $('kpis').replaceChildren(
-    kpi('Всего на кошельках', usd(a.total), `${S.wallets.length} кошельков · ${S.config.networks.length} сетей${unscanned ? ` · не проверено: ${unscanned}` : ''}`, 'hero'),
-    kpi('Кошельков с деньгами', `${a.withMoney}`, `из ${a.scanned} · от ${usd(dust)}`),
-    kpi('Сетей с деньгами', `${netsWithMoney}`, `от ${usd(dust)} суммарно`),
-    kpi('Нужен газ', `${a.gas.length}`, 'пар «кошелёк × сеть»', a.gas.length ? 'warn' : ''),
-    kpi('Последний скан', ago(S.scan.scannedAt), fmtDate(S.scan.scannedAt)),
+    kpi(tt("Всего на кошельках"), usd(a.total), tt("{0} кошельков · {1} сетей{2}", [S.wallets.length, S.config.networks.length, unscanned ? tt(" · не проверено: {0}", [unscanned]) : '']), 'hero'),
+    kpi(tt("Кошельков с деньгами"), `${a.withMoney}`, tt("из {0} · от {1}", [a.scanned, usd(dust)])),
+    kpi(tt("Сетей с деньгами"), `${netsWithMoney}`, tt("от {0} суммарно", [usd(dust)])),
+    kpi(tt("Нужен газ"), `${a.gas.length}`, tt("пар «кошелёк × сеть»"), a.gas.length ? 'warn' : ''),
+    kpi(tt("Последний скан"), ago(S.scan.scannedAt), fmtDate(S.scan.scannedAt)),
   );
 
   const netRows = [...a.byNet.entries()]
-    .map(([net, x]) => ({ id: net, name: networkName(net), value: x.value, extra: [`кошельков от ${usd(dust)}: ${x.wallets}`] }))
+    .map(([net, x]) => ({ id: net, name: networkName(net), value: x.value, extra: [tt("кошельков от {0}: {1}", [usd(dust), x.wallets])] }))
     .filter((r) => r.value > 0)
     .sort((x, y) => y.value - x.value);
-  $('netHint').textContent = 'клик — показать кошельки в этой сети';
+  $('netHint').textContent = tt("клик — показать кошельки в этой сети");
   barList($('byNetwork'), netRows, {
     onClick: (r) => {
       $('fNetwork').value = r.id;
@@ -363,7 +364,7 @@ function renderOverview() {
   });
 
   const tokRows = [...a.byToken.entries()]
-    .map(([sym, x]) => ({ name: sym, value: x.value, extra: [`${amount(x.amount)} ${sym}`, `сетей: ${x.nets.size} · кошельков: ${x.wallets.size}`] }))
+    .map(([sym, x]) => ({ name: sym, value: x.value, extra: [`${amount(x.amount)} ${sym}`, tt("сетей: {0} · кошельков: {1}", [x.nets.size, x.wallets.size])] }))
     .sort((x, y) => y.value - x.value);
   barList($('byToken'), tokRows, {});
 
@@ -380,7 +381,7 @@ function renderOverview() {
             h('span', { class: 'grow' }, h('b', { text: walletName(w) }), h('span', { class: 'muted', text: ` · ${w.group}` })),
             h('span', { class: 'muted small', text: s.nets.filter((n) => n.total >= dust).slice(0, 3).map((n) => networkName(n.net)).join(', ') }),
             h('b', { class: 'num', text: usd(s.total) })))
-      : [h('div', { class: 'd-empty', text: 'Нет кошельков с балансом выше порога.' })]),
+      : [h('div', { class: 'd-empty', text: tt("Нет кошельков с балансом выше порога.") })]),
   );
 
   const gas = a.gas.sort((x, y) => y.value - x.value).slice(0, 15);
@@ -388,11 +389,11 @@ function renderOverview() {
     ...(gas.length
       ? gas.map(({ w, net, value }) =>
           h('div', { class: 'list-row', onclick: () => openWallet(w.id) },
-            h('span', { class: 'badge gas', text: '⚠ газ' }),
+            h('span', { class: 'badge gas', text: tt("⚠ газ") }),
             h('span', { class: 'grow' }, h('b', { text: `#${w.id} ${walletName(w)}` }), h('span', { class: 'muted', text: ` · ${networkName(net)}` })),
-            h('span', { class: 'num', text: `токенов на ${usd(value)}` })))
-      : [h('div', { class: 'd-empty', text: 'Везде, где есть токены, есть и газ.' })]),
-    ...(a.gas.length > 15 ? [h('div', { class: 'bl-more', text: `+ ещё ${a.gas.length - 15} — фильтр «нужен газ» во вкладке «Кошельки»` })] : []),
+            h('span', { class: 'num', text: tt("токенов на {0}", [usd(value)]) })))
+      : [h('div', { class: 'd-empty', text: tt("Везде, где есть токены, есть и газ.") })]),
+    ...(a.gas.length > 15 ? [h('div', { class: 'bl-more', text: tt("+ ещё {0} — фильтр «нужен газ» во вкладке «Кошельки»", [a.gas.length - 15]) })] : []),
   );
 
   $('errorsCard').classList.toggle('hidden', !a.errors.size);
@@ -402,7 +403,7 @@ function renderOverview() {
         h('span', { class: 'badge err', text: '✕' }),
         h('b', { text: networkName(net) }),
         h('span', { class: 'grow muted', text: e.msg }),
-        h('span', { class: 'muted small', text: `кошельков: ${e.count}` }))),
+        h('span', { class: 'muted small', text: tt("кошельков: {0}", [e.count]) }))),
   );
 }
 
@@ -434,7 +435,7 @@ function visibleWallets() {
   const k = dir === 'asc' ? 1 : -1;
   list.sort((a, b) => {
     if (key === 'total') return k * (S.sums.get(a.id).total - S.sums.get(b.id).total) || a.id - b.id;
-    if (key === 'label') return k * walletName(a).localeCompare(walletName(b), 'ru', { numeric: true }) || a.id - b.id;
+    if (key === 'label') return k * walletName(a).localeCompare(walletName(b), LANG, { numeric: true }) || a.id - b.id;
     return k * (a.id - b.id);
   });
   return list;
@@ -447,9 +448,9 @@ function fillSelect(sel, options, firstLabel) {
 }
 
 function renderWallets() {
-  const groups = [...new Set(S.wallets.map((w) => w.group))].sort((a, b) => a.localeCompare(b, 'ru', { numeric: true }));
-  fillSelect($('fGroup'), groups.map((g) => [g, g]), 'Все группы');
-  fillSelect($('fNetwork'), NETWORKS.filter((n) => S.config.networks.includes(n.id)).map((n) => [n.id, n.name]), 'Все сети');
+  const groups = [...new Set(S.wallets.map((w) => w.group))].sort((a, b) => a.localeCompare(b, LANG, { numeric: true }));
+  fillSelect($('fGroup'), groups.map((g) => [g, g]), tt("Все группы"));
+  fillSelect($('fNetwork'), NETWORKS.filter((n) => S.config.networks.includes(n.id)).map((n) => [n.id, n.name]), tt("Все сети"));
 
   for (const th of document.querySelectorAll('th.sortable')) {
     th.classList.toggle('sorted', th.dataset.sort === S.sort.key);
@@ -465,39 +466,39 @@ function renderWallets() {
     const s = S.sums.get(w.id);
     const open = S.open.has(w.id);
     const chips = [];
-    if (!s.scanned) chips.push(h('span', { class: 'muted small', text: 'не проверен' }));
+    if (!s.scanned) chips.push(h('span', { class: 'muted small', text: tt("не проверен") }));
     for (const n of s.nets) {
       if (n.total < dust && !n.needGas) continue;
-      chips.push(h('span', { class: `chip${n.needGas ? ' gas' : ''}`, title: n.needGas ? 'Есть токены, но нет нативной монеты на газ' : '' },
-        n.needGas ? '⚠ ' : '', networkName(n.net), ' ', h('b', { text: usdShort(n.total) }), n.needGas ? ' · нет газа' : ''));
+      chips.push(h('span', { class: `chip${n.needGas ? ' gas' : ''}`, title: n.needGas ? tt("Есть токены, но нет нативной монеты на газ") : '' },
+        n.needGas ? '⚠ ' : '', networkName(n.net), ' ', h('b', { text: usdShort(n.total) }), n.needGas ? tt(" · нет газа") : ''));
     }
-    if (s.errNets.length) chips.push(h('span', { class: 'chip err', title: s.errNets.map(networkName).join(', ') }, `✕ ошибки: ${s.errNets.length}`));
+    if (s.errNets.length) chips.push(h('span', { class: 'chip err', title: s.errNets.map(networkName).join(', ') }, tt("✕ ошибки: {0}", [s.errNets.length])));
     if (s.scanned && !chips.length) {
-      chips.push(h('span', { class: 'muted small', text: s.total > 0 ? `мелочь ${usd(s.total)}` : 'пусто' }));
+      chips.push(h('span', { class: 'muted small', text: s.total > 0 ? tt("мелочь {0}", [usd(s.total)]) : tt("пусто") }));
     }
-    if (s.unpricedReal) chips.push(h('span', { class: 'chip', title: 'Монеты без цены у Alchemy — проверь вручную в деталях' }, `? без цены: ${s.unpricedReal}`));
+    if (s.unpricedReal) chips.push(h('span', { class: 'chip', title: tt("Монеты без цены у Alchemy — проверь вручную в деталях") }, tt("? без цены: {0}", [s.unpricedReal])));
 
     frag.append(h('tr', { class: `w-row${open ? ' open' : ''}${s.scanned && s.total < dust ? ' dim' : ''}`, 'data-id': w.id },
       h('td', { class: 'c-sel' }, h('input', { type: 'checkbox', 'data-sel': w.id, checked: S.selected.has(w.id) })),
       h('td', { class: 'c-id', text: w.id }),
       h('td', null, h('div', { class: 'w-label', text: walletName(w) }), h('div', { class: 'w-group', text: w.group })),
       h('td', null, h('span', { class: 'addr mono' }, shortAddr(w.address),
-        h('button', { class: 'icon', 'data-act': 'copy', title: 'Скопировать адрес', text: '⧉' }))),
+        h('button', { class: 'icon', 'data-act': 'copy', title: tt("Скопировать адрес"), text: '⧉' }))),
       h('td', null, h('div', { class: 'chips' }, chips)),
       h('td', { class: 'c-num w-total', text: s.scanned ? usd(s.total) : '—' }),
       h('td', { class: 'c-act' },
-        h('button', { class: 'icon', 'data-act': 'scan', title: 'Пересканировать этот кошелёк', text: '↻' }),
-        h('button', { class: 'icon', 'data-act': 'edit', title: 'Переименовать / сменить группу', text: '✎' }))));
+        h('button', { class: 'icon', 'data-act': 'scan', title: tt("Пересканировать этот кошелёк"), text: '↻' }),
+        h('button', { class: 'icon', 'data-act': 'edit', title: tt("Переименовать / сменить группу"), text: '✎' }))));
     if (open) frag.append(detailsRow(w, s, showSpam));
   }
   tbody.replaceChildren(frag);
 
   const empty = $('walletsEmpty');
   empty.classList.toggle('hidden', list.length > 0);
-  empty.textContent = S.wallets.length ? 'Под фильтр ничего не попало.' : 'Кошельков пока нет — добавь их во вкладке «Добавить».';
+  empty.textContent = S.wallets.length ? tt("Под фильтр ничего не попало.") : tt("Кошельков пока нет — добавь их во вкладке «Добавить».");
 
   const visTotal = sum(list, (w) => S.sums.get(w.id).total);
-  $('walletsFoot').textContent = `Показано ${list.length} из ${S.wallets.length} · сумма по показанным: ${usd(visTotal)}`;
+  $('walletsFoot').textContent = tt("Показано {0} из {1} · сумма по показанным: {2}", [list.length, S.wallets.length, usd(visTotal)]);
   const visIds = list.map((w) => w.id);
   $('selAll').checked = visIds.length > 0 && visIds.every((id) => S.selected.has(id));
   renderSelBar();
@@ -506,10 +507,10 @@ function renderWallets() {
 function detailsRow(w, s, showSpam) {
   const dust = S.config.dustUsd;
   const meta = h('div', { class: 'd-meta' },
-    h('span', null, 'Адрес: ', h('span', { class: 'mono', text: w.address })),
-    w.source ? h('span', { text: `Источник: ${w.source}` }) : null,
-    w.aliases?.length ? h('span', { text: `Также: ${w.aliases.join('; ')}` }) : null,
-    h('span', { text: `Проверен: ${s.scanned ? fmtDate(s.scannedAt) : 'нет'}` }),
+    h('span', null, tt("Адрес: "), h('span', { class: 'mono', text: w.address })),
+    w.source ? h('span', { text: tt("Источник: {0}", [w.source]) }) : null,
+    w.aliases?.length ? h('span', { text: tt("Также: {0}", [w.aliases.join('; ')]) }) : null,
+    h('span', { text: tt("Проверен: {0}", [s.scanned ? fmtDate(s.scannedAt) : tt("нет")]) }),
     h('a', { href: `https://debank.com/profile/${w.address}`, target: '_blank', rel: 'noopener noreferrer', text: 'DeBank ↗' }));
 
   const cards = [];
@@ -526,30 +527,30 @@ function detailsRow(w, s, showSpam) {
         h('td', { class: 'c-num muted', text: price(t.price) }),
         h('td', { class: 'c-num', text: usd(t.value) }),
         h('td', { class: 'c-act' },
-          t.spam ? h('span', { class: 'badge spam', text: 'спам?' }) : null,
+          t.spam ? h('span', { class: 'badge spam', text: tt("спам?") }) : null,
           t.hidden
-            ? h('button', { class: 'icon', 'data-act': 'unhide', 'data-key': hiddenKey(n.net, t.token), title: 'Вернуть монету', text: '↺' })
-            : t.native ? null : h('button', { class: 'icon', 'data-act': 'hide', 'data-key': hiddenKey(n.net, t.token), title: 'Скрыть эту монету везде (спам, фейковая цена)', text: '✕' }))));
+            ? h('button', { class: 'icon', 'data-act': 'unhide', 'data-key': hiddenKey(n.net, t.token), title: tt("Вернуть монету"), text: '↺' })
+            : t.native ? null : h('button', { class: 'icon', 'data-act': 'hide', 'data-key': hiddenKey(n.net, t.token), title: tt("Скрыть эту монету везде (спам, фейковая цена)"), text: '✕' }))));
     cards.push(h('div', { class: 'd-net' },
       h('div', { class: 'd-net-head' },
         h('span', { class: 'name', text: networkName(n.net) }),
         h('b', { class: 'num', text: usd(n.total) }),
-        n.needGas ? h('span', { class: 'badge gas', text: '⚠ нет газа' }) : null,
-        n.error ? h('span', { class: 'badge err', text: '✕ ошибка' }) : null,
+        n.needGas ? h('span', { class: 'badge gas', text: tt("⚠ нет газа") }) : null,
+        n.error ? h('span', { class: 'badge err', text: tt("✕ ошибка") }) : null,
         h('span', { class: 'spacer' }),
-        explorer ? h('a', { href: explorer, target: '_blank', rel: 'noopener noreferrer', text: 'эксплорер ↗' }) : null),
+        explorer ? h('a', { href: explorer, target: '_blank', rel: 'noopener noreferrer', text: tt("эксплорер ↗") }) : null),
       n.error ? h('div', { class: 'd-empty', text: n.error }) : null,
       rows.length ? h('table', { class: 'tokens' }, h('tbody', null, rows)) : null,
-      !showSpam && hiddenCount ? h('div', { class: 'd-empty', text: `+ ${hiddenCount} монет без цены / спам / скрытых — включи «показывать спам» сверху` }) : null));
+      !showSpam && hiddenCount ? h('div', { class: 'd-empty', text: tt("+ {0} монет без цены / спам / скрытых — включи «показывать спам» сверху", [hiddenCount]) }) : null));
   }
-  if (!cards.length) cards.push(h('div', { class: 'd-empty', text: s.scanned ? 'На включённых сетях ничего нет.' : 'Ещё не проверен — нажми ↻.' }));
+  if (!cards.length) cards.push(h('div', { class: 'd-empty', text: s.scanned ? tt("На включённых сетях ничего нет.") : tt("Ещё не проверен — нажми ↻.") }));
   return h('tr', { class: 'd-row' }, h('td', { colspan: 7 }, meta, h('div', { class: 'd-nets' }, cards)));
 }
 
 function renderSelBar() {
   const n = S.selected.size;
   $('selBar').classList.toggle('hidden', n === 0);
-  $('selText').textContent = `Выбрано: ${n}`;
+  $('selText').textContent = tt("Выбрано: {0}", [n]);
 }
 
 async function setHidden(key, hide) {
@@ -565,13 +566,13 @@ async function onWalletAction(act, id, el) {
   const w = S.wallets.find((x) => x.id === id);
   if (act === 'copy') {
     await navigator.clipboard.writeText(w.address);
-    toast('Адрес скопирован');
+    toast(tt("Адрес скопирован"));
   } else if (act === 'scan') {
     await startScan([id]);
   } else if (act === 'edit') {
-    const label = prompt('Название кошелька', w.label);
+    const label = prompt(tt("Название кошелька"), w.label);
     if (label == null) return;
-    const group = prompt('Группа', w.group);
+    const group = prompt(tt("Группа"), w.group);
     if (group == null) return;
     await api(`/api/wallets/${id}`, { label, group }, 'PATCH');
     await loadState();
@@ -589,7 +590,7 @@ function exportCsv() {
     const s = v == null ? '' : String(v);
     return /[";\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
   };
-  const lines = [['#', 'Группа', 'Название', 'Адрес', 'Сеть', 'Монета', 'Контракт', 'Количество', 'Цена $', 'Стоимость $', 'Пометка'].join(';')];
+  const lines = [['#', tt("Группа"), tt("Название"), tt("Адрес"), tt("Сеть"), tt("Монета"), tt("Контракт"), tt("Количество"), tt("Цена $"), tt("Стоимость $"), tt("Пометка")].join(';')];
   for (const w of list) {
     const s = S.sums.get(w.id);
     let any = false;
@@ -597,11 +598,11 @@ function exportCsv() {
       for (const t of n.tokens) {
         if (!showSpam && (t.spam || t.hidden)) continue;
         any = true;
-        const mark = [t.spam && 'спам?', t.hidden && 'скрыта', n.needGas && t.native === false && 'нет газа'].filter(Boolean).join(', ');
+        const mark = [t.spam && tt("спам?"), t.hidden && tt("скрыта"), n.needGas && t.native === false && tt("нет газа")].filter(Boolean).join(', ');
         lines.push([w.id, w.group, walletName(w), w.address, networkName(n.net), t.symbol, t.token ?? 'native', t.amount, t.price ?? '', t.value != null ? t.value.toFixed(2) : '', mark].map(esc).join(';'));
       }
     }
-    if (!any) lines.push([w.id, w.group, walletName(w), w.address, '', '', '', '', '', s.scanned ? '0' : '', s.scanned ? 'пусто' : 'не проверен'].map(esc).join(';'));
+    if (!any) lines.push([w.id, w.group, walletName(w), w.address, '', '', '', '', '', s.scanned ? '0' : '', s.scanned ? tt("пусто") : tt("не проверен")].map(esc).join(';'));
   }
   const blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
   const a = h('a', { href: URL.createObjectURL(blob), download: `balances-${new Date().toISOString().slice(0, 10)}.csv` });
@@ -631,17 +632,17 @@ function parseAddressLines(text) {
 
 function renderAdd() {
   const { out, bad } = parseAddressLines($('addrInput').value);
-  $('addrCount').textContent = out.length || bad ? `найдено адресов: ${out.length}${bad ? `, строк без адреса: ${bad}` : ''}` : '';
+  $('addrCount').textContent = out.length || bad ? tt("найдено адресов: {0}{1}", [out.length, bad ? tt(", строк без адреса: {0}", [bad]) : '']) : '';
 }
 
 function nextSeedNumber() {
   let max = 0;
   for (const w of S.wallets) {
-    const m = /^Сид (\d+)$/.exec(w.group);
+    const m = /^(?:Сид|Seed) (\d+)$/.exec(w.group);
     if (m) max = Math.max(max, Number(m[1]));
   }
   for (const p of S.preview ?? []) {
-    const m = /^Сид (\d+)$/.exec(p.group);
+    const m = /^(?:Сид|Seed) (\d+)$/.exec(p.group);
     if (m) max = Math.max(max, Number(m[1]));
   }
   return max + 1;
@@ -652,7 +653,7 @@ async function deriveFromSeeds() {
   const passEl = $('seedPass');
   const text = ta.value;
   const passphrase = passEl.value;
-  if (!text.trim()) return toast('Вставь сид-фразы или ключи');
+  if (!text.trim()) return toast(tt("Вставь сид-фразы или ключи"));
   const count = Math.min(200, Math.max(1, Number($('seedCount').value) || 1));
   const start = Math.max(0, (Number($('seedStart').value) || 1) - 1);
   const pathKind = $('seedPath').value;
@@ -667,7 +668,7 @@ async function deriveFromSeeds() {
   const preview = [];
   const failed = [...badLines.map((b) => b.lineNo)];
   let seedNo = nextSeedNumber();
-  let keyNo = 1 + S.wallets.filter((w) => w.group === 'Приватные ключи').length;
+  let keyNo = 1 + S.wallets.filter((w) => (w.group === 'Приватные ключи' || w.group === 'Private keys')).length;
   // addresses are the dedup key: the same seed always gives the same addresses, so a seed imported
   // earlier (or pasted twice in another form) is recognised without ever storing the phrase itself
   const inList = new Map(S.wallets.map((w) => [w.address.toLowerCase(), w]));
@@ -676,7 +677,7 @@ async function deriveFromSeeds() {
   try {
     for (let i = 0; i < items.length; i++) {
       const it = items[i];
-      status.textContent = `Обрабатываю ${i + 1} / ${items.length}…`;
+      status.textContent = tt("Обрабатываю {0} / {1}…", [i + 1, items.length]);
       if (i % 5 === 0) await new Promise((r) => setTimeout(r)); // let the UI breathe
       let addrs;
       try {
@@ -693,16 +694,16 @@ async function deriveFromSeeds() {
         // seen this seed before → put its new accounts into the same group instead of "Сид N+1"
         const prev = addrs.map((a) => inList.get(a.address.toLowerCase())).find((w) => w);
         if (prev && addrs.every((a) => inList.has(a.address.toLowerCase()))) stats.knownSeeds++;
-        group = it.label || (prev?.source?.startsWith('seed') ? prev.group : null) || `Сид ${seedNo++}`;
-        labelOf = (a) => `Акк ${a.index + 1}`;
+        group = it.label || (prev?.source?.startsWith('seed') ? prev.group : null) || tt("Сид {0}", [seedNo++]);
+        labelOf = (a) => tt("Акк {0}", [a.index + 1]);
         source = (a) => `seed «${group}» ${a.path}`;
       } else if (it.kind === 'key') {
         stats.keys++;
-        group = 'Приватные ключи';
-        labelOf = () => it.label || `Ключ ${keyNo++}`;
+        group = tt("Приватные ключи");
+        labelOf = () => it.label || tt("Ключ {0}", [keyNo++]);
         source = () => 'private key';
       } else {
-        group = 'Адреса';
+        group = tt("Адреса");
         labelOf = () => it.label;
         source = () => 'manual';
       }
@@ -725,14 +726,14 @@ async function deriveFromSeeds() {
   }
   failed.sort((a, b) => a - b);
   const fresh = preview.filter((p) => !p.exists).length;
-  const parts = [`Сидов: ${stats.seeds}`, stats.keys && `ключей: ${stats.keys}`, `новых адресов: ${fresh}`];
+  const parts = [tt("Сидов: {0}", [stats.seeds]), stats.keys && tt("ключей: {0}", [stats.keys]), tt("новых адресов: {0}", [fresh])];
   if (dupLines.length) {
     const list = dupLines.slice(0, 15).map((d) => `${d.lineNo}=${d.ofLine}`).join(', ');
-    parts.push(`повторы в списке пропущены: ${dupLines.length} (строка=строка: ${list}${dupLines.length > 15 ? '…' : ''})`);
+    parts.push(tt("повторы в списке пропущены: {0} (строка=строка: {1}{2})", [dupLines.length, list, dupLines.length > 15 ? '…' : '']));
   }
-  if (stats.knownSeeds) parts.push(`уже были импортированы раньше: ${stats.knownSeeds}`);
-  if (stats.overlap) parts.push(`совпавших адресов внутри списка: ${stats.overlap}`);
-  if (failed.length) parts.push(`не распознаны строки: ${failed.slice(0, 30).join(', ')} (остались в поле)`);
+  if (stats.knownSeeds) parts.push(tt("уже были импортированы раньше: {0}", [stats.knownSeeds]));
+  if (stats.overlap) parts.push(tt("совпавших адресов внутри списка: {0}", [stats.overlap]));
+  if (failed.length) parts.push(tt("не распознаны строки: {0} (остались в поле)", [failed.slice(0, 30).join(', ')]));
   status.textContent = parts.filter(Boolean).join(' · ');
   S.preview = preview;
   renderPreview();
@@ -743,9 +744,9 @@ function renderPreview() {
   $('previewCard').classList.toggle('hidden', !p?.length);
   if (!p?.length) return;
   const fresh = p.filter((x) => !x.exists).length;
-  $('previewInfo').textContent = `${p.length} адресов · новых: ${fresh} · уже в списке: ${p.length - fresh} (их не добавим повторно)`;
+  $('previewInfo').textContent = tt("{0} адресов · новых: {1} · уже в списке: {2} (их не добавим повторно)", [p.length, fresh, p.length - fresh]);
   $('previewAdd').disabled = fresh === 0;
-  $('previewAdd').textContent = fresh ? `Добавить ${fresh} новых` : 'Новых нет';
+  $('previewAdd').textContent = fresh ? tt("Добавить {0} новых", [fresh]) : tt("Новых нет");
   // new ones first, already-known ones after
   const rows = [...p].sort((a, b) => a.exists - b.exists);
   $('previewRows').replaceChildren(...rows.map((x) =>
@@ -753,7 +754,7 @@ function renderPreview() {
       h('td', { class: 'c-id', text: x.lineNo }),
       h('td', { text: x.group }),
       h('td', { text: x.label }),
-      h('td', null, h('span', { class: 'mono', text: x.address }), x.exists ? h('span', { class: 'badge spam', text: ` уже есть: ${x.existingName}` }) : null),
+      h('td', null, h('span', { class: 'mono', text: x.address }), x.exists ? h('span', { class: 'badge spam', text: tt(" уже есть: {0}", [x.existingName]) }) : null),
       h('td', { class: 'mono muted', text: x.path }))));
 }
 
@@ -761,7 +762,7 @@ function renderPreview() {
 
 function renderSettings() {
   const c = S.config;
-  $('keyStatus').replaceChildren(c.hasKey ? h('span', { class: 'badge ok', text: `✓ ключ сохранён (${c.keyHint})` }) : h('span', { class: 'badge err', text: 'ключ не задан' }));
+  $('keyStatus').replaceChildren(c.hasKey ? h('span', { class: 'badge ok', text: tt("✓ ключ сохранён ({0})", [c.keyHint]) }) : h('span', { class: 'badge err', text: tt("ключ не задан") }));
   $('dustInput').value = c.dustUsd;
   if (!S.netDraft) S.netDraft = new Set(c.networks);
   const st = c.networkStatus ?? {};
@@ -775,7 +776,7 @@ function renderSettings() {
     });
     return h('label', { title: s?.error ?? n.id },
       h('span', { class: 'l' }, box, n.name),
-      s ? h('span', { class: `badge ${s.ok ? 'ok' : 'err'}`, text: s.ok ? '✓' : '✕ нет' }) : null);
+      s ? h('span', { class: `badge ${s.ok ? 'ok' : 'err'}`, text: s.ok ? '✓' : tt("✕ нет") }) : null);
   }));
   renderNetCount();
   const hidden = c.hiddenTokens;
@@ -784,15 +785,15 @@ function renderSettings() {
         const [net, token] = key.split(':');
         return h('div', { class: 'list-row' },
           h('span', { class: 'grow' }, h('b', { text: networkName(net) }), ' ', h('span', { class: 'mono muted', text: token })),
-          h('button', { onclick: () => guarded(() => setHidden(key, false)), text: 'Вернуть' }));
+          h('button', { onclick: () => guarded(() => setHidden(key, false)), text: tt("Вернуть") }));
       })
-    : [h('div', { class: 'd-empty', text: 'Ничего не скрыто.' })]));
+    : [h('div', { class: 'd-empty', text: tt("Ничего не скрыто.") })]));
 }
 
 function renderNetCount() {
   const st = S.config.networkStatus ?? {};
   const bad = NETWORKS.filter((n) => st[n.id] && !st[n.id].ok).length;
-  $('netCount').textContent = `включено ${S.netDraft.size} из ${NETWORKS.length}${st.checkedAt ? ` · проверено ${ago(st.checkedAt)}, не работают: ${bad}` : ''}`;
+  $('netCount').textContent = tt("включено {0} из {1}{2}", [S.netDraft.size, NETWORKS.length, st.checkedAt ? tt(" · проверено {0}, не работают: {1}", [ago(st.checkedAt), bad]) : '']);
 }
 
 // ---------- wiring ----------
@@ -849,20 +850,20 @@ $('clearSelBtn').addEventListener('click', () => {
 });
 $('scanSelBtn').addEventListener('click', () => startScan([...S.selected]));
 $('groupSelBtn').addEventListener('click', () => guarded(async () => {
-  const group = prompt(`Новая группа для ${S.selected.size} кошельков`);
+  const group = prompt(tt("Новая группа для {0} кошельков", [S.selected.size]));
   if (!group) return;
   for (const id of S.selected) await api(`/api/wallets/${id}`, { group }, 'PATCH');
   await loadState();
 }));
 $('delSelBtn').addEventListener('click', () => guarded(async () => {
-  if (!confirm(`Удалить из списка ${S.selected.size} кошельков? (Сами кошельки не пострадают — это только список в панели.)`)) return;
+  if (!confirm(tt("Удалить из списка {0} кошельков? (Сами кошельки не пострадают — это только список в панели.)", [S.selected.size]))) return;
   await api('/api/wallets/delete', { ids: [...S.selected] });
   S.selected.clear();
   await loadState();
 }));
 $('rescanErrBtn').addEventListener('click', () => {
   const ids = S.wallets.filter((w) => S.sums.get(w.id).errNets.length).map((w) => w.id);
-  if (!ids.length) return toast('Кошельков с ошибками нет');
+  if (!ids.length) return toast(tt("Кошельков с ошибками нет"));
   startScan(ids);
 });
 $('delEmptyBtn').addEventListener('click', () => guarded(async () => {
@@ -872,8 +873,8 @@ $('delEmptyBtn').addEventListener('click', () => guarded(async () => {
     // keep wallets with tokens Alchemy can't price — could be a fresh airdrop
     return !s.nets.some((n) => n.tokens.some((t) => !t.spam && !t.hidden && (t.value == null || t.value >= 0.01)));
   });
-  if (!empty.length) return toast('Пустых проверенных кошельков нет');
-  if (!confirm(`Удалить из списка ${empty.length} проверенных кошельков, где ничего нет? Кошельки с монетами без цены останутся.`)) return;
+  if (!empty.length) return toast(tt("Пустых проверенных кошельков нет"));
+  if (!confirm(tt("Удалить из списка {0} проверенных кошельков, где ничего нет? Кошельки с монетами без цены останутся.", [empty.length]))) return;
   await api('/api/wallets/delete', { ids: empty.map((w) => w.id) });
   await loadState();
 }));
@@ -882,12 +883,12 @@ $('exportBtn').addEventListener('click', exportCsv);
 $('addrInput').addEventListener('input', renderAdd);
 $('addAddrBtn').addEventListener('click', () => guarded(async () => {
   const { out } = parseAddressLines($('addrInput').value);
-  if (!out.length) return toast('Не нашёл ни одного адреса 0x…');
-  const group = $('addrGroup').value.trim() || 'Адреса';
+  if (!out.length) return toast(tt("Не нашёл ни одного адреса 0x…"));
+  const group = $('addrGroup').value.trim() || tt("Адреса");
   const r = await api('/api/wallets', { wallets: out.map((x) => ({ ...x, group, source: 'manual' })) });
   $('addrInput').value = '';
   renderAdd();
-  toast(`Добавлено: ${r.added}${r.merged ? `, уже были: ${r.merged}` : ''}${r.invalid.length ? `, неверных: ${r.invalid.length}` : ''}`);
+  toast(tt("Добавлено: {0}{1}{2}", [r.added, r.merged ? tt(", уже были: {0}", [r.merged]) : '', r.invalid.length ? tt(", неверных: {0}", [r.invalid.length]) : '']));
   await loadState();
 }));
 $('deriveBtn').addEventListener('click', () => guarded(deriveFromSeeds));
@@ -896,11 +897,11 @@ $('seedFile').addEventListener('change', () => guarded(async () => {
   const file = $('seedFile').files[0];
   $('seedFile').value = '';
   if (!file) return;
-  if (file.size > 5_000_000) return toast('Файл слишком большой (больше 5 МБ)');
+  if (file.size > 5_000_000) return toast(tt("Файл слишком большой (больше 5 МБ)"));
   const text = await file.text();
   const ta = $('seedInput');
   ta.value = ta.value.trim() ? `${ta.value.trim()}\n${text}` : text;
-  $('seedStatus').textContent = `Из файла загружено строк: ${text.split(/\r?\n/).filter((l) => l.trim()).length}. Нажми «Получить адреса».`;
+  $('seedStatus').textContent = tt("Из файла загружено строк: {0}. Нажми «Получить адреса».", [text.split(/\r?\n/).filter((l) => l.trim()).length]);
 }));
 $('previewCancel').addEventListener('click', () => {
   S.preview = null;
@@ -912,38 +913,38 @@ $('previewAdd').addEventListener('click', () => guarded(async () => {
   S.preview = null;
   renderPreview();
   $('seedStatus').textContent = '';
-  toast(`Добавлено: ${r.added}${r.merged ? `, совпали с уже добавленными: ${r.merged}` : ''}`);
+  toast(tt("Добавлено: {0}{1}", [r.added, r.merged ? tt(", совпали с уже добавленными: {0}", [r.merged]) : '']));
   await loadState();
 }));
 
 $('saveKeyBtn').addEventListener('click', () => guarded(async () => {
   const k = $('keyInput').value.trim();
-  if (!k) return toast('Вставь ключ');
+  if (!k) return toast(tt("Вставь ключ"));
   S.config = await api('/api/config', { apiKey: k });
   $('keyInput').value = '';
-  toast('Ключ сохранён — проверяю сети…');
+  toast(tt("Ключ сохранён — проверяю сети…"));
   renderAll();
   S.config.networkStatus = await api('/api/networks/check', {});
   renderAll();
   const bad = Object.entries(S.config.networkStatus).filter(([k2, v]) => k2 !== 'checkedAt' && !v.ok).length;
-  toast(bad ? `Ключ работает, но ${bad} сетей недоступны — см. список ниже` : 'Ключ работает во всех сетях');
+  toast(bad ? tt("Ключ работает, но {0} сетей недоступны — см. список ниже", [bad]) : tt("Ключ работает во всех сетях"));
 }));
 $('resetAllBtn').addEventListener('click', () => guarded(async () => {
-  if (!S.wallets.length) return toast('Список и так пуст');
-  if (!confirm(`Удалить из панели все ${S.wallets.length} кошельков и результаты сканов?\n\nКлюч Alchemy и настройки сетей останутся. Деньги на кошельках это не затрагивает.`)) return;
+  if (!S.wallets.length) return toast(tt("Список и так пуст"));
+  if (!confirm(tt("Удалить из панели все {0} кошельков и результаты сканов?\n\nКлюч Alchemy и настройки сетей останутся. Деньги на кошельках это не затрагивает.", [S.wallets.length]))) return;
   const r = await api('/api/reset', {});
   S.open.clear();
   S.selected.clear();
   S.preview = null;
   renderPreview();
   await loadState();
-  toast(`Удалено кошельков: ${r.removed}. Можно заливать фразы заново — дубли отсеются сами.`, 6000);
+  toast(tt("Удалено кошельков: {0}. Можно заливать фразы заново — дубли отсеются сами.", [r.removed]), 6000);
   switchTab('add');
 }));
 $('saveDustBtn').addEventListener('click', () => guarded(async () => {
   S.config = await api('/api/config', { dustUsd: Number($('dustInput').value) });
   recompute();
-  toast('Порог сохранён');
+  toast(tt("Порог сохранён"));
   renderAll();
 }));
 $('netAllBtn').addEventListener('click', () => {
@@ -962,7 +963,7 @@ $('netDisableBadBtn').addEventListener('click', () => {
 $('saveNetsBtn').addEventListener('click', () => guarded(async () => {
   S.config = await api('/api/config', { networks: [...S.netDraft] });
   recompute();
-  toast('Сети сохранены');
+  toast(tt("Сети сохранены"));
   renderAll();
 }));
 $('netCheckBtn').addEventListener('click', () => guarded(async () => {
@@ -972,7 +973,7 @@ $('netCheckBtn').addEventListener('click', () => guarded(async () => {
     S.config.networkStatus = await api('/api/networks/check', {});
     S.config.networks = [...S.netDraft];
     renderSettings();
-    toast('Проверка сетей завершена');
+    toast(tt("Проверка сетей завершена"));
   } finally {
     $('netCheckBtn').disabled = false;
   }
@@ -982,6 +983,9 @@ const sweep = mountSweep({ S, h, $, api, toast, usd, amount, guarded, walletName
 const activityTab = mountActivity({ S, h, $, api, toast, guarded, walletName });
 
 // boot
+translateDom();
+$('langBtn').textContent = LANG === 'ru' ? 'EN' : 'RU';
+$('langBtn').addEventListener('click', () => setLang(LANG === 'ru' ? 'en' : 'ru'));
 const initialTab = location.hash.slice(1);
 await guarded(loadState);
 switchTab(['overview', 'wallets', 'add', 'activity', 'sweep', 'settings'].includes(initialTab) ? initialTab : 'overview');

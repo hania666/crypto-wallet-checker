@@ -1,5 +1,7 @@
 // Seed phrases / private keys → addresses, entirely in the browser.
 // Nothing in this module talks to the network; callers send only the resulting addresses.
+import { tt } from './i18n.js';
+
 const { ethers } = window;
 
 export const PATHS = {
@@ -72,7 +74,7 @@ async function bip39Seed(phrase, passphrase) {
 export async function deriveWallets(item, { count, start, pathKind, passphrase }) {
   if (item.kind === 'key') {
     const w = new ethers.Wallet(item.secret);
-    return [{ address: w.address, path: 'приватный ключ', wallet: w }];
+    return [{ address: w.address, path: tt("приватный ключ"), wallet: w }];
   }
   if (item.kind !== 'seed') return [];
   const seed = globalThis.crypto?.subtle
@@ -92,10 +94,10 @@ export async function deriveWallets(item, { count, start, pathKind, passphrase }
 
 export async function deriveAddresses(item, { count, start, pathKind, passphrase }) {
   if (item.kind === 'key') {
-    return [{ address: ethers.computeAddress(item.secret), path: 'приватный ключ', index: null }];
+    return [{ address: ethers.computeAddress(item.secret), path: tt("приватный ключ"), index: null }];
   }
   if (item.kind === 'address') {
-    return [{ address: ethers.getAddress(item.secret), path: 'адрес', index: null }];
+    return [{ address: ethers.getAddress(item.secret), path: tt("адрес"), index: null }];
   }
   const seed = globalThis.crypto?.subtle
     ? await bip39Seed(item.secret, passphrase)

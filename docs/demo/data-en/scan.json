@@ -1,0 +1,1762 @@
+{
+ "scannedAt": "2026-10-16T11:06:40.257Z",
+ "wallets": {
+  "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.001598",
+       "price": 2450,
+       "value": 3.9151000000000002,
+       "spam": false
+      },
+      {
+       "token": "0x000000000000000000000000001ad35d9cae44a4",
+       "native": false,
+       "symbol": "ARB",
+       "name": "Arbitrum",
+       "decimals": 18,
+       "amount": "30.08",
+       "price": 0.42,
+       "value": 12.6336,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.003683",
+       "price": 2450,
+       "value": 9.02335,
+       "spam": false
+      },
+      {
+       "token": "0x0000000000000000000000000019e996681cd205",
+       "native": false,
+       "symbol": "USDC",
+       "name": "USD Coin",
+       "decimals": 18,
+       "amount": "2.53",
+       "price": 1,
+       "value": 2.53,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x70997970c51812dc3a010c7d01b50e0d17dc79c8": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "BNB",
+       "name": "BNB",
+       "decimals": 18,
+       "amount": "0.00748",
+       "price": 730,
+       "value": 5.4604,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x90f79bf6eb2c4f870365e785982e1f101e93b906": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": "0x00000000000000000000000000184c1f05031b93",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x15d34aaf54267db7d7c367839aaf71a00a2c6a65": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.00369",
+       "price": 2450,
+       "value": 9.0405,
+       "spam": false
+      },
+      {
+       "token": "0x00000000000000000000000000123a36564742e6",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x9965507d1a55bcc2695c58ba16fb37d819b0a4dc": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.001824",
+       "price": 2450,
+       "value": 4.4688,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [
+      {
+       "token": "0x000000000000000000000000001483b85b2a1915",
+       "native": false,
+       "symbol": "USDT",
+       "name": "Tether USD",
+       "decimals": 18,
+       "amount": "9.66",
+       "price": 1,
+       "value": 9.66,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x976ea74026e726554db657fa54763abd0c3a0aa9": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.001342",
+       "price": 2450,
+       "value": 3.2879,
+       "spam": false
+      },
+      {
+       "token": "0x00000000000000000000000000056ba5252c151f",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x14dc79964da2c08b23698b3d3cc7ca32193d9955": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.001714",
+       "price": 2450,
+       "value": 4.1993,
+       "spam": false
+      },
+      {
+       "token": "0x0000000000000000000000000013cd41c6e25a6d",
+       "native": false,
+       "symbol": "USDC",
+       "name": "USD Coin",
+       "decimals": 18,
+       "amount": "11.25",
+       "price": 1,
+       "value": 11.25,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x23618e81e3f5cdf7f54c3d65f7fbc0abf5b21e8f": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.001121",
+       "price": 2450,
+       "value": 2.7464500000000003,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "BNB",
+       "name": "BNB",
+       "decimals": 18,
+       "amount": "0.00547",
+       "price": 730,
+       "value": 3.9931,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0xa0ee7a142d267c1f36714e4a8f75612f20a79720": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.000772",
+       "price": 2450,
+       "value": 1.8914,
+       "spam": false
+      },
+      {
+       "token": "0x000000000000000000000000000cfbdee4416ebd",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0xbcd4042de499d14e55001ccbb24a551f3b954096": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.002658",
+       "price": 2450,
+       "value": 6.5121,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x71be63f3384f5fb98995898a86b02fb2426c5788": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.000998",
+       "price": 2450,
+       "value": 2.4451,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.001622",
+       "price": 2450,
+       "value": 3.9739,
+       "spam": false
+      },
+      {
+       "token": "0x000000000000000000000000000f0fce321141ff",
+       "native": false,
+       "symbol": "USDC",
+       "name": "USD Coin",
+       "decimals": 18,
+       "amount": "4.37",
+       "price": 1,
+       "value": 4.37,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0xfabb0ac9d68b0b445fb7357272ff202c5651694a": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.002589",
+       "price": 2450,
+       "value": 6.343050000000001,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.003626",
+       "price": 2450,
+       "value": 8.8837,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x1cbd3b2770909d4e10f157cabc84c7264073c9ec": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.00202",
+       "price": 2450,
+       "value": 4.949,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0xdf3e18d64bc6a983f673ab319ccae4f1a57c7097": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.002833",
+       "price": 2450,
+       "value": 6.94085,
+       "spam": false
+      },
+      {
+       "token": "0x000000000000000000000000000c74940811e78d",
+       "native": false,
+       "symbol": "USDC",
+       "name": "USD Coin",
+       "decimals": 18,
+       "amount": "7.04",
+       "price": 1,
+       "value": 7.04,
+       "spam": false
+      },
+      {
+       "token": "0x000000000000000000000000000de80d3e3034da",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0xcd3b766ccdd6ae721141f452c550ca635964ce71": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": "0x000000000000000000000000000e73dc32932c21",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [
+      {
+       "token": "0x000000000000000000000000001d1a769df943e6",
+       "native": false,
+       "symbol": "USDT",
+       "name": "Tether USD",
+       "decimals": 18,
+       "amount": "1.67",
+       "price": 1,
+       "value": 1.67,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x2546bcd3c84621e976d8185a91a922ae77ecec30": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.00066",
+       "price": 2450,
+       "value": 1.617,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.000312",
+       "price": 2450,
+       "value": 0.7644,
+       "spam": false
+      },
+      {
+       "token": "0x00000000000000000000000000103d5c8e60b457",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0xbda5747bfd65f08deb54cb465eb87d40e51b197e": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": "0x0000000000000000000000000020c05dff9cef18",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0xdd2fd4581271e230360230f9337d5c0430bf44c0": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.001522",
+       "price": 2450,
+       "value": 3.7289,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": "0x00000000000000000000000000005f6004f3fc26",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [
+      {
+       "token": "0x0000000000000000000000000020400cd3b36b82",
+       "native": false,
+       "symbol": "USDT",
+       "name": "Tether USD",
+       "decimals": 18,
+       "amount": "13.28",
+       "price": 1,
+       "value": 13.28,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.002223",
+       "price": 2450,
+       "value": 5.446350000000001,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.000304",
+       "price": 2450,
+       "value": 0.7448,
+       "spam": false
+      },
+      {
+       "token": "0x0000000000000000000000000008385ae22d12ac",
+       "native": false,
+       "symbol": "USDC",
+       "name": "USD Coin",
+       "decimals": 18,
+       "amount": "7.4",
+       "price": 1,
+       "value": 7.4,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x09db0a93b389bef724429898f539aeb7ac2dd55f": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.000355",
+       "price": 2450,
+       "value": 0.86975,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.003528",
+       "price": 2450,
+       "value": 8.6436,
+       "spam": false
+      },
+      {
+       "token": "0x000000000000000000000000001fc567909468dc",
+       "native": false,
+       "symbol": "USDC",
+       "name": "USD Coin",
+       "decimals": 18,
+       "amount": "4.49",
+       "price": 1,
+       "value": 4.49,
+       "spam": false
+      },
+      {
+       "token": "0x00000000000000000000000000206f9a6eeababa",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x02484cb50aac86eae85610d6f4bf026f30f6627d": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x08135da0a343e492fa2d4282f2ae34c6c5cc1bbe": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.002038",
+       "price": 2450,
+       "value": 4.9931,
+       "spam": false
+      },
+      {
+       "token": "0x00000000000000000000000000076c3fdb0464b5",
+       "native": false,
+       "symbol": "ARB",
+       "name": "Arbitrum",
+       "decimals": 18,
+       "amount": "8.91",
+       "price": 0.42,
+       "value": 3.7422,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.0036",
+       "price": 2450,
+       "value": 8.82,
+       "spam": false
+      },
+      {
+       "token": "0x000000000000000000000000001415339d14e655",
+       "native": false,
+       "symbol": "USDC",
+       "name": "USD Coin",
+       "decimals": 18,
+       "amount": "11.62",
+       "price": 1,
+       "value": 11.62,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x5e661b79fe2d3f6ce70f5aac07d8cd9abb2743f1": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.002142",
+       "price": 2450,
+       "value": 5.2479,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.003078",
+       "price": 2450,
+       "value": 7.5411,
+       "spam": false
+      },
+      {
+       "token": "0x0000000000000000000000000003eb3b035bb65f",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  },
+  "0x61097ba76cd906d2ba4fd106e757f7eb455fc295": {
+   "scannedAt": "2026-10-16T11:06:40.257Z",
+   "nets": {
+    "eth-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "ETH",
+       "name": "Ethereum",
+       "decimals": 18,
+       "amount": "0.001786",
+       "price": 2450,
+       "value": 4.3757,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "arb-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "opt-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "base-mainnet": {
+     "tokens": [
+      {
+       "token": "0x000000000000000000000000001f60127cb4306c",
+       "native": false,
+       "symbol": "Visit claim-usdc.xyz",
+       "name": "Claim your reward",
+       "decimals": 18,
+       "amount": "1000",
+       "price": 3,
+       "value": 3000,
+       "spam": true
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "bnb-mainnet": {
+     "tokens": [
+      {
+       "token": null,
+       "native": true,
+       "symbol": "BNB",
+       "name": "BNB",
+       "decimals": 18,
+       "amount": "0.01376",
+       "price": 730,
+       "value": 10.0448,
+       "spam": false
+      }
+     ],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "linea-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "zksync-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    },
+    "scroll-mainnet": {
+     "tokens": [],
+     "error": null,
+     "at": "2026-10-16T11:06:40.257Z"
+    }
+   }
+  }
+ }
+}

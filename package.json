@@ -6,7 +6,8 @@
   "description": "Local web panel: balances, activity and sweeping for hundreds of EVM wallets across 27 networks (Alchemy)",
   "scripts": {
     "start": "node server.js",
-    "demo": "node docs/demo/make-demo.mjs && node docs/demo/run-demo.mjs"
+    "demo": "node docs/demo/make-demo.mjs en && node docs/demo/run-demo.mjs en",
+    "demo:ru": "node docs/demo/make-demo.mjs && node docs/demo/run-demo.mjs"
   },
   "dependencies": {
     "ethers": "6.13.4"
