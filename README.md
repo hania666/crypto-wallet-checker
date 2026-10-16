@@ -55,7 +55,7 @@ Want to look around first without a key? `npm run demo` opens the panel with dem
 | **Wallets** | Table with filters (group, network, non-empty, needs gas), per-network token details, explorer + DeBank links, CSV export, rescan errors, bulk delete. |
 | **Add** | Addresses, seed phrases, private keys, `.txt` upload. Duplicates are skipped automatically, including a seed imported earlier — recognised by its addresses, the phrase itself is never stored. |
 | **Activity** | Ranks wallets by real on-chain use in 11 networks: DEX swaps, transfers to outside addresses, contract calls, Polymarket. Ignores address-poisoning spam and transfers between your own wallets. A "5 for today" list with done-marks helps when a site lets you add only a few wallets per day. |
-| **Sweeper** | Collects leftovers to one address: live dry-run plan with gas per transaction, "gas bus" (a wallet with spare native coin funds gas for token-only wallets when it pays off), reconciliation with the panel total, confirmation dialog, per-tx status and CSV log. Technical details (in Russian): [docs/SWEEPER.ru.md](docs/SWEEPER.ru.md). |
+| **Sweeper** | Collects leftovers to one address: live dry-run plan with gas per transaction, "gas bus" (a wallet with spare native coin funds gas for token-only wallets when it pays off), reconciliation with the panel total, confirmation dialog, per-tx status and CSV log. Technical details: [docs/SWEEPER.md](docs/SWEEPER.md). |
 | **Settings** | API key, networks, dust threshold, hidden tokens, "start from scratch". |
 
 ![Wallets](docs/screenshots/wallets.png)
@@ -87,7 +87,7 @@ All in `data/` next to the code (git-ignored):
 ## Testing without real money
 
 `testchain/` has a local Hardhat setup (EIP-1559, legacy and OP-stack chains) with public test mnemonics to run the
-sweeper end to end. See (in Russian) [docs/SWEEPER.ru.md](docs/SWEEPER.ru.md#тестирование-на-локальных-сетях-без-реальных-денег).
+sweeper end to end. See [docs/SWEEPER.md](docs/SWEEPER.md#testing-on-local-networks-no-real-money).
 
 ## License
 
