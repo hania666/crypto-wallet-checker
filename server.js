@@ -390,6 +390,8 @@ function send(res, status, body, type = 'application/json; charset=utf-8') {
 }
 
 async function readJson(req) {
+  // JSON only: an HTML form on another site can't send application/json without a CORS preflight we never answer
+  if (!/^application\/json\b/i.test(req.headers['content-type'] ?? '')) throw httpError(415, 'Нужен JSON');
   let size = 0;
   const chunks = [];
   for await (const c of req) {
@@ -543,6 +545,10 @@ const server = http.createServer(async (req, res) => {
     const origin = req.headers.origin;
     if (req.method !== 'GET' && origin && !ALLOWED_HOSTS.has(origin.replace(/^https?:\/\//, ''))) {
       return send(res, 403, { error: 'bad origin' });
+    }
+    // every state-changing call must be JSON (see readJson) — also the ones without a body
+    if (req.method !== 'GET' && !/^application\/json\b/i.test(req.headers['content-type'] ?? '')) {
+      return send(res, 415, { error: 'Нужен JSON' });
     }
     const url = new URL(req.url, `http://${req.headers.host}`);
     if (url.pathname.startsWith('/api/')) return await handleApi(req, res, url);

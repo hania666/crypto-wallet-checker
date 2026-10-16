@@ -10,7 +10,7 @@
     "demo:ru": "node docs/demo/make-demo.mjs && node docs/demo/run-demo.mjs"
   },
   "dependencies": {
-    "ethers": "6.13.4"
+    "ethers": "6.17.0"
   },
   "license": "MIT",
   "engines": {

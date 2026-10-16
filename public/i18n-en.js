@@ -175,6 +175,7 @@ export const EN = {
   "Новая группа для {0} кошельков": "New group for {0} wallets",
   "Новых нет": "Nothing new",
   "Нужен Alchemy API key": "An Alchemy API key is required",
+  "Нужен JSON": "JSON required",
   "Нужен газ": "Needs gas",
   "Нужен список wallets": "A wallets list is required",
   "Обзор": "Overview",

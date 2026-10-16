@@ -24,6 +24,9 @@ The author used it to find and collect **$76 spread over 940 forgotten wallets**
   addresses go to the local server and to disk (`data/`). For sweeping, transactions are signed in the page and
   keys are forgotten after sending, after 20 minutes, on a button or when the tab closes.
 - Strict CSP: the page can only talk to the local server and the listed RPC hosts.
+- **What does leave your computer: addresses.** To read balances and history the panel sends your *addresses*
+  (never seeds or keys) to Alchemy and to public RPC providers, several per request, from your IP. A provider could
+  therefore see that these addresses are checked together. Use a VPN if that matters to you.
 - The code is open — read it before you trust it. Start with `public/seeds.js` (derivation) and `public/sweep.js` (signing).
 
 ## Quick start
