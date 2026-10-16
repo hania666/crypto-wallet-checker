@@ -1,0 +1,4 @@
+node_modules/
+/data/
+testchain/node_modules/
+testchain/data/

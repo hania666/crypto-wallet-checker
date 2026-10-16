@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Балансы кошельков</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/vendor/ethers.js"></script>
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">Балансы кошельков</div>
+    <nav class="tabs" id="tabs">
+      <button data-tab="overview" class="active">Обзор</button>
+      <button data-tab="wallets">Кошельки <span class="count" id="walletCount"></span></button>
+      <button data-tab="add">Добавить</button>
+      <button data-tab="activity">Активность</button>
+      <button data-tab="sweep">Сборщик</button>
+      <button data-tab="settings">Настройки</button>
+    </nav>
+    <div class="scanbox">
+      <span class="muted" id="scanInfo"></span>
+      <button class="primary" id="scanAllBtn">Сканировать все</button>
+    </div>
+  </header>
+
+  <div class="progress hidden" id="progress">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span id="progressText"></span>
+  </div>
+
+  <div id="banner"></div>
+
+  <main>
+    <!-- ОБЗОР -->
+    <section class="tab" id="tab-overview">
+      <div class="kpis" id="kpis"></div>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-head"><h2>По сетям</h2><span class="muted small" id="netHint"></span></div>
+          <div class="barlist" id="byNetwork"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h2>По монетам</h2><span class="muted small">суммарно по всем кошелькам</span></div>
+          <div class="barlist" id="byToken"></div>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-head"><h2>Самые «богатые» кошельки</h2></div>
+          <div id="topWallets"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h2>Где нужен газ</h2><span class="muted small">токены есть, а нативной монеты на комиссию нет</span></div>
+          <div id="gasList"></div>
+        </div>
+      </div>
+      <div class="card hidden" id="errorsCard">
+        <div class="card-head"><h2>Ошибки сканирования</h2></div>
+        <div id="errorsList"></div>
+      </div>
+    </section>
+
+    <!-- КОШЕЛЬКИ -->
+    <section class="tab hidden" id="tab-wallets">
+      <div class="toolbar">
+        <input type="search" id="fSearch" placeholder="Поиск: название, группа, адрес…">
+        <select id="fGroup"><option value="">Все группы</option></select>
+        <select id="fNetwork"><option value="">Все сети</option></select>
+        <label class="chk"><input type="checkbox" id="fNonEmpty" checked> только с балансом</label>
+        <label class="chk"><input type="checkbox" id="fGas"> только «нужен газ»</label>
+        <label class="chk"><input type="checkbox" id="fSpam"> показывать спам и монеты без цены</label>
+        <span class="spacer"></span>
+        <button id="exportBtn">Экспорт CSV</button>
+      </div>
+      <div class="toolbar selbar hidden" id="selBar">
+        <span id="selText"></span>
+        <button id="scanSelBtn">Сканировать выбранные</button>
+        <button id="groupSelBtn">Сменить группу</button>
+        <button class="danger" id="delSelBtn">Удалить выбранные</button>
+        <button class="ghost" id="clearSelBtn">Снять выделение</button>
+      </div>
+      <div class="table-wrap">
+        <table class="wallets">
+          <thead>
+            <tr>
+              <th class="c-sel"><input type="checkbox" id="selAll" title="Выбрать все видимые"></th>
+              <th class="c-id sortable" data-sort="id">#</th>
+              <th class="sortable" data-sort="label">Кошелёк</th>
+              <th>Адрес</th>
+              <th>Где деньги</th>
+              <th class="c-num sortable" data-sort="total">Итого</th>
+              <th class="c-act"></th>
+            </tr>
+          </thead>
+          <tbody id="walletRows"></tbody>
+        </table>
+        <div class="empty hidden" id="walletsEmpty"></div>
+      </div>
+      <div class="toolbar footbar">
+        <span class="muted small" id="walletsFoot"></span>
+        <span class="spacer"></span>
+        <button id="rescanErrBtn">Пересканировать с ошибками</button>
+        <button class="danger ghost" id="delEmptyBtn">Удалить кошельки с $0</button>
+      </div>
+    </section>
+
+    <!-- ДОБАВИТЬ -->
+    <section class="tab hidden" id="tab-add">
+      <div class="grid2">
+        <div class="card">
+          <h2>Адреса</h2>
+          <p class="muted">По одному на строку. Можно с названием: <code>0xabc… Основной</code> или <code>Основной, 0xabc…</code></p>
+          <textarea id="addrInput" rows="12" spellcheck="false" autocomplete="off" placeholder="0x1234…&#10;Твинк 2, 0xabcd…"></textarea>
+          <div class="row">
+            <label>Группа <input id="addrGroup" placeholder="Адреса"></label>
+            <span class="muted small" id="addrCount"></span>
+            <span class="spacer"></span>
+            <button class="primary" id="addAddrBtn">Добавить адреса</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Сид-фразы и приватные ключи</h2>
+          <div class="note">
+            <b>Обрабатываются только в этом окне браузера.</b> Из сид-фразы здесь же получаются адреса, и только они уходят
+            на локальный сервер и сохраняются. Сама фраза никуда не отправляется и не сохраняется, поле очищается сразу.
+          </div>
+          <p class="muted">Одна сид-фраза или приватный ключ на строку. Можно подписать: <code>Метамаск старый: word1 word2 …</code></p>
+          <textarea id="seedInput" rows="8" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"
+            data-gramm="false" data-lt-active="false" placeholder="одна фраза на строку"></textarea>
+          <div class="row wrap">
+            <label>Аккаунтов на сид <input type="number" id="seedCount" value="5" min="1" max="200"></label>
+            <label>Начать с № <input type="number" id="seedStart" value="1" min="1"></label>
+            <label>Путь
+              <select id="seedPath">
+                <option value="metamask">MetaMask / Rabby / OKX / Trust (m/44'/60'/0'/0/i)</option>
+                <option value="ledgerlive">Ledger Live (m/44'/60'/i'/0/0)</option>
+                <option value="legacy">Legacy / MEW (m/44'/60'/0'/i)</option>
+              </select>
+            </label>
+            <label>Passphrase <input type="password" id="seedPass" autocomplete="off" placeholder="если была"></label>
+          </div>
+          <div class="row">
+            <span class="muted small" id="seedStatus"></span>
+            <span class="spacer"></span>
+            <input type="file" id="seedFile" accept=".txt,.csv,text/plain" class="hidden">
+            <button id="seedFileBtn" title="Файл читается только этим окном браузера">Загрузить из .txt</button>
+            <button class="primary" id="deriveBtn">Получить адреса</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card hidden" id="previewCard">
+        <div class="card-head">
+          <h2>Найденные адреса</h2>
+          <span class="muted small" id="previewInfo"></span>
+          <span class="spacer"></span>
+          <button class="ghost" id="previewCancel">Отмена</button>
+          <button class="primary" id="previewAdd">Добавить в список</button>
+        </div>
+        <div class="table-wrap">
+          <table class="plain">
+            <thead><tr><th>Строка</th><th>Группа</th><th>Название</th><th>Адрес</th><th>Путь</th></tr></thead>
+            <tbody id="previewRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- АКТИВНОСТЬ -->
+    <section class="tab hidden" id="tab-activity">
+      <div id="activityRoot"></div>
+    </section>
+
+    <!-- СБОРЩИК -->
+    <section class="tab hidden" id="tab-sweep">
+      <div class="note crit">
+        <b>Перед тем как собирать:</b> перевод со многих кошельков на один адрес навсегда связывает их в блокчейне —
+        антисибил-фильтры аирдропов увидят их как одного человека. И адрес получателя проверяй по символам: транзакции не отменить.
+        Ключи и сиды вставляются только в эту вкладку, хранятся в её памяти и не уходят на локальный сервер и на диск.
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <h2>1. Куда собрать</h2>
+          <div class="row"><input id="swDest" class="mono" placeholder="0x… адрес получателя" spellcheck="false" autocomplete="off"></div>
+          <p class="small" id="swDestHint"></p>
+          <div class="row wrap">
+            <label>Порог $ <input type="number" id="swThreshold" value="1" min="0" step="0.5" title="Не переводить то, что после газа дешевле этой суммы"></label>
+            <label>Запас на рост газа % <input type="number" id="swHeadroom" value="50" min="5" max="300" title="EIP-1559: maxFee = base × (1 + запас) + tip. Неистраченное остаётся на кошельке пылью"></label>
+            <label>RPC
+              <select id="swRpc">
+                <option value="public">Публичные RPC</option>
+                <option value="alchemy">Alchemy (ключ из «Настроек»)</option>
+              </select>
+            </label>
+          </div>
+          <p class="muted small" id="swRpcHint"></p>
+          <label class="chk small"><input type="checkbox" id="swBus" checked> 🚌 газовый автобус: кошельку с токенами, но без газа,
+            газ привезёт кошелёк этой же сети с самым большим запасом — ровно сколько нужно, и только если это выгодно</label>
+          <div class="muted small">Сети (из последнего скана, сумма до газа):</div>
+          <div class="netgrid" id="swNets"></div>
+          <div class="row"><span class="spacer"></span><button class="primary" id="swBuildBtn">Построить план (ничего не отправляет)</button></div>
+        </div>
+        <div class="card">
+          <h2>2. Ключи для подписи</h2>
+          <div class="note">
+            <b>Только в этой вкладке.</b> Сиды и ключи превращаются в кошельки прямо здесь; в памяти страницы остаются только те,
+            чьи адреса есть в плане, остальное сразу выбрасывается. На сервер и на диск ничего не пишется. Ключи забываются после
+            отправки, через 20 минут, по кнопке и при закрытии вкладки.
+          </div>
+          <textarea id="swSeeds" rows="6" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"
+            data-gramm="false" data-lt-active="false" placeholder="одна сид-фраза или приватный ключ на строку"></textarea>
+          <div class="row wrap">
+            <label>Аккаунтов на сид <input type="number" id="swCount" value="5" min="1" max="200"></label>
+            <label>Начать с № <input type="number" id="swStart" value="1" min="1"></label>
+            <label>Путь
+              <select id="swPath">
+                <option value="metamask">MetaMask / Rabby (m/44'/60'/0'/0/i)</option>
+                <option value="ledgerlive">Ledger Live (m/44'/60'/i'/0/0)</option>
+                <option value="legacy">Legacy / MEW (m/44'/60'/0'/i)</option>
+              </select>
+            </label>
+            <label>Passphrase <input type="password" id="swPass" autocomplete="off" placeholder="если была"></label>
+          </div>
+          <div class="row">
+            <span class="small" id="swKeyState"></span>
+            <span class="spacer"></span>
+            <button class="danger ghost" id="swForgetBtn">Забыть ключи</button>
+            <button class="primary" id="swLoadKeysBtn">Загрузить ключи</button>
+          </div>
+          <p class="muted small" id="swKeyStatus"></p>
+        </div>
+      </div>
+
+      <div class="card hidden" id="swPlanCard">
+        <div class="card-head">
+          <h2>3. План (пробный прогон)</h2>
+          <span class="muted small" id="swPlanInfo"></span>
+          <span class="spacer"></span>
+          <label class="chk small"><input type="checkbox" id="swShowSkipped"> показать пропущенные токены</label>
+          <button id="swExportBtn">Экспорт CSV</button>
+        </div>
+        <div class="kpis sw-kpis" id="swKpis"></div>
+        <p class="small sw-recon" id="swRecon"></p>
+        <div class="table-wrap sw-classwrap" id="swClasses"></div>
+        <p class="muted small">Балансы и газ — живые, с RPC прямо сейчас; цены — из последнего скана. «Газ» — резерв по максимальной цене,
+          по факту обычно уходит меньше, поэтому нативной монеты придёт чуть больше плана. Кошельки без газа автоматически не пополняются.</p>
+        <div class="table-wrap">
+          <table class="plain sw-plan">
+            <thead><tr><th class="c-sel"></th><th>Кошелёк</th><th>Монета</th><th class="c-num">Количество</th><th class="c-num">Стоимость</th><th class="c-num">Газ</th><th class="c-num">Чистыми</th><th>Действие / статус</th><th></th></tr></thead>
+            <tbody id="swPlanRows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card hidden" id="swRunCard">
+        <h2>4. Отправка</h2>
+        <p class="muted small">По одной транзакции за раз в каждой сети (с ожиданием подтверждения), сети идут параллельно. Сначала токены, потом остаток нативной монеты.</p>
+        <div class="row wrap">
+          <label class="chk"><input type="checkbox" id="swStopOnError" checked> остановить всё при первой ошибке</label>
+          <span class="spacer"></span>
+          <span class="small" id="swRunStatus"></span>
+          <button class="danger hidden" id="swStopBtn">Стоп</button>
+          <button class="primary" id="swRunBtn">Отправить выбранные…</button>
+        </div>
+      </div>
+      <dialog id="swConfirm" class="sw-dialog"></dialog>
+    </section>
+
+    <!-- НАСТРОЙКИ -->
+    <section class="tab hidden" id="tab-settings">
+      <div class="grid2">
+        <div class="card">
+          <h2>Alchemy API key</h2>
+          <p class="muted">Бесплатный ключ: dashboard.alchemy.com → Apps → твоё приложение → API Key. Хранится только локально в <code>data/config.json</code>.</p>
+          <div class="row">
+            <input type="password" id="keyInput" autocomplete="off" placeholder="вставь ключ">
+            <button class="primary" id="saveKeyBtn">Сохранить</button>
+          </div>
+          <p class="small" id="keyStatus"></p>
+        </div>
+        <div class="card">
+          <h2>Порог «мелочи»</h2>
+          <p class="muted">Кошельки и монеты дешевле этой суммы считаются пустыми.</p>
+          <div class="row">
+            <label>$ <input type="number" id="dustInput" min="0" step="0.5"></label>
+            <button id="saveDustBtn">Сохранить</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <h2>Сети</h2>
+          <span class="muted small" id="netCount"></span>
+          <span class="spacer"></span>
+          <button id="netAllBtn">Все</button>
+          <button id="netCoreBtn">Только основные</button>
+          <button id="netCheckBtn">Проверить ключом</button>
+          <button id="netDisableBadBtn">Выключить нерабочие</button>
+        </div>
+        <p class="muted small">Если какой-то сети нет в твоём Alchemy-приложении, включи её в дашборде Alchemy (Apps → Networks) или просто выключи здесь.</p>
+        <div class="netgrid" id="netGrid"></div>
+        <div class="row"><span class="spacer"></span><button class="primary" id="saveNetsBtn">Сохранить сети</button></div>
+      </div>
+      <div class="card">
+        <h2>Скрытые монеты</h2>
+        <p class="muted">Монеты, которые ты скрыл кнопкой ✕ в деталях кошелька (например, спам с фейковой ценой).</p>
+        <div id="hiddenList"></div>
+      </div>
+      <div class="card">
+        <h2>Начать с нуля</h2>
+        <p class="muted">Удаляет весь список кошельков и результаты сканов, нумерация снова начнётся с #1. Ключ Alchemy, сети и скрытые монеты остаются.
+          Сами кошельки и деньги на них это не затрагивает.</p>
+        <div class="row"><button class="danger" id="resetAllBtn">Удалить все кошельки и результаты</button></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="tooltip hidden" id="tooltip"></div>
+  <div class="toast hidden" id="toast"></div>
+</body>
+</html>

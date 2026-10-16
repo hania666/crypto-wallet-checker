@@ -1,0 +1,16 @@
+{
+  "name": "wallet-checker-testchain",
+  "private": true,
+  "type": "module",
+  "description": "Local Hardhat chains + fixture for testing the sweeper tab. Test mnemonics only.",
+  "devDependencies": {
+    "hardhat": "2.22.17",
+    "solc": "0.8.28"
+  },
+  "scripts": {
+    "chains": "node start-chains.mjs",
+    "setup": "node setup.mjs",
+    "panel": "node panel.mjs",
+    "verify": "node verify.mjs"
+  }
+}

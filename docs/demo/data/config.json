@@ -1,0 +1,16 @@
+{
+ "apiKey": "demo-key-not-real",
+ "dustUsd": 0.5,
+ "hiddenTokens": [],
+ "networkStatus": {},
+ "networks": [
+  "eth-mainnet",
+  "arb-mainnet",
+  "opt-mainnet",
+  "base-mainnet",
+  "zksync-mainnet",
+  "linea-mainnet",
+  "scroll-mainnet",
+  "bnb-mainnet"
+ ]
+}

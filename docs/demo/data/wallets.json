@@ -1,0 +1,205 @@
+{
+ "nextId": 26,
+ "items": [
+  {
+   "id": 1,
+   "address": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+   "label": "Акк 1",
+   "group": "Сид 1",
+   "source": "seed «Сид 1» m/44'/60'/0'/0/0",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 2,
+   "address": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+   "label": "Акк 2",
+   "group": "Сид 1",
+   "source": "seed «Сид 1» m/44'/60'/0'/0/1",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 3,
+   "address": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+   "label": "Акк 3",
+   "group": "Сид 1",
+   "source": "seed «Сид 1» m/44'/60'/0'/0/2",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 4,
+   "address": "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+   "label": "Акк 4",
+   "group": "Сид 1",
+   "source": "seed «Сид 1» m/44'/60'/0'/0/3",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 5,
+   "address": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+   "label": "Акк 5",
+   "group": "Сид 1",
+   "source": "seed «Сид 1» m/44'/60'/0'/0/4",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 6,
+   "address": "0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc",
+   "label": "Акк 1",
+   "group": "Сид 2",
+   "source": "seed «Сид 2» m/44'/60'/0'/0/5",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 7,
+   "address": "0x976EA74026E726554dB657fA54763abd0C3a0aa9",
+   "label": "Акк 2",
+   "group": "Сид 2",
+   "source": "seed «Сид 2» m/44'/60'/0'/0/6",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 8,
+   "address": "0x14dC79964da2C08b23698B3D3cc7Ca32193d9955",
+   "label": "Акк 3",
+   "group": "Сид 2",
+   "source": "seed «Сид 2» m/44'/60'/0'/0/7",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 9,
+   "address": "0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f",
+   "label": "Акк 4",
+   "group": "Сид 2",
+   "source": "seed «Сид 2» m/44'/60'/0'/0/8",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 10,
+   "address": "0xa0Ee7A142d267C1f36714E4a8F75612F20a79720",
+   "label": "Акк 5",
+   "group": "Сид 2",
+   "source": "seed «Сид 2» m/44'/60'/0'/0/9",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 11,
+   "address": "0xBcd4042DE499D14e55001CcbB24a551F3b954096",
+   "label": "Акк 1",
+   "group": "Сид 3",
+   "source": "seed «Сид 3» m/44'/60'/0'/0/10",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 12,
+   "address": "0x71bE63f3384f5fb98995898A86B02Fb2426c5788",
+   "label": "Акк 2",
+   "group": "Сид 3",
+   "source": "seed «Сид 3» m/44'/60'/0'/0/11",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 13,
+   "address": "0xFABB0ac9d68B0B445fB7357272Ff202C5651694a",
+   "label": "Акк 3",
+   "group": "Сид 3",
+   "source": "seed «Сид 3» m/44'/60'/0'/0/12",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 14,
+   "address": "0x1CBd3b2770909D4e10f157cABC84C7264073C9Ec",
+   "label": "Акк 4",
+   "group": "Сид 3",
+   "source": "seed «Сид 3» m/44'/60'/0'/0/13",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 15,
+   "address": "0xdF3e18d64BC6A983f673Ab319CCaE4f1a57C7097",
+   "label": "Акк 5",
+   "group": "Сид 3",
+   "source": "seed «Сид 3» m/44'/60'/0'/0/14",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 16,
+   "address": "0xcd3B766CCDd6AE721141F452C550Ca635964ce71",
+   "label": "Акк 1",
+   "group": "Сид 4",
+   "source": "seed «Сид 4» m/44'/60'/0'/0/15",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 17,
+   "address": "0x2546BcD3c84621e976D8185a91A922aE77ECEc30",
+   "label": "Акк 2",
+   "group": "Сид 4",
+   "source": "seed «Сид 4» m/44'/60'/0'/0/16",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 18,
+   "address": "0xbDA5747bFD65F08deb54cb465eB87D40e51B197E",
+   "label": "Акк 3",
+   "group": "Сид 4",
+   "source": "seed «Сид 4» m/44'/60'/0'/0/17",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 19,
+   "address": "0xdD2FD4581271e230360230F9337D5c0430Bf44C0",
+   "label": "Акк 4",
+   "group": "Сид 4",
+   "source": "seed «Сид 4» m/44'/60'/0'/0/18",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 20,
+   "address": "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199",
+   "label": "Акк 5",
+   "group": "Сид 4",
+   "source": "seed «Сид 4» m/44'/60'/0'/0/19",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 21,
+   "address": "0x09DB0a93B389bEF724429898f539AEB7ac2Dd55f",
+   "label": "Акк 1",
+   "group": "Сид 5",
+   "source": "seed «Сид 5» m/44'/60'/0'/0/20",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 22,
+   "address": "0x02484cb50AAC86Eae85610D6f4Bf026f30f6627D",
+   "label": "Акк 2",
+   "group": "Сид 5",
+   "source": "seed «Сид 5» m/44'/60'/0'/0/21",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 23,
+   "address": "0x08135Da0A343E492FA2d4282F2AE34c6c5CC1BbE",
+   "label": "Акк 3",
+   "group": "Сид 5",
+   "source": "seed «Сид 5» m/44'/60'/0'/0/22",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 24,
+   "address": "0x5E661B79FE2D3F6cE70F5AAC07d8Cd9abb2743F1",
+   "label": "Акк 4",
+   "group": "Сид 5",
+   "source": "seed «Сид 5» m/44'/60'/0'/0/23",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  },
+  {
+   "id": 25,
+   "address": "0x61097BA76cD906d2ba4FD106E757f7Eb455fc295",
+   "label": "Акк 5",
+   "group": "Сид 5",
+   "source": "seed «Сид 5» m/44'/60'/0'/0/24",
+   "addedAt": "2026-10-16T10:51:31.439Z"
+  }
+ ]
+}
