@@ -31,22 +31,40 @@
 
 ## Быстрый старт
 
-1. Установи **Node.js 20+** с [nodejs.org](https://nodejs.org) (версия LTS).
-2. Скачай проект:
-   ```bash
-   git clone https://github.com/hania666/crypto-wallet-checker.git
-   cd crypto-wallet-checker
-   npm install
+### Самый простой способ (Windows, одна команда)
+
+1. Установи **Node.js** с [nodejs.org](https://nodejs.org): кнопка **LTS**, дальше «Далее → Далее → Установить».
+   На шаге «Tools for Native Modules» **галочку не ставь**: проекту эти инструменты не нужны, а с галочкой
+   после установки открывается синее окно, которое качает Visual Studio и часто падает с ошибками.
+2. Нажми **Win + R**, напиши `cmd`, нажми Enter. Вставь в чёрное окно **одну строку** и нажми Enter:
+   ```bat
+   powershell -NoProfile -ExecutionPolicy Bypass -Command "iwr 'https://github.com/hania666/crypto-wallet-checker/archive/refs/heads/main.zip' -OutFile $env:USERPROFILE\wc.zip; Expand-Archive $env:USERPROFILE\wc.zip $env:USERPROFILE -Force; Set-Location $env:USERPROFILE\crypto-wallet-checker-main; cmd /c start.bat"
    ```
-3. Запусти: `npm start` (в Windows можно двойным кликом по `start.bat`) и открой **http://127.0.0.1:4777**.
-4. Возьми бесплатный **API-ключ Alchemy** (балансы и история приходят от Alchemy):
+   Она сама скачает проект в твою папку пользователя (`C:\Users\<имя>\crypto-wallet-checker-main`),
+   установит всё нужное и откроет панель на **http://127.0.0.1:4777**. Чёрное окно не закрывай, пока пользуешься панелью.
+3. **В следующий раз:** открой `C:\Users\<имя>\crypto-wallet-checker-main` и дважды кликни **`start.bat`**.
+
+Git и права администратора не нужны. Если Windows покажет «Система Windows защитила ваш компьютер» на `start.bat`,
+нажми **Подробнее → Выполнить в любом случае**.
+
+### Вручную (любая ОС)
+
+1. Установи **Node.js 20+** с [nodejs.org](https://nodejs.org).
+2. Скачай код: `git clone https://github.com/hania666/crypto-wallet-checker.git`
+   или на этой странице **Code → Download ZIP** и распакуй.
+3. В папке проекта: `npm install`, потом `npm start`, и открой **http://127.0.0.1:4777**.
+   Команды запускай именно в папке проекта, а не в `C:\Windows\System32`, где открывается терминал администратора.
+
+### Первый запуск
+
+1. Возьми бесплатный **API-ключ Alchemy** (балансы и история приходят от Alchemy):
    1. Зарегистрируйся на [dashboard.alchemy.com](https://dashboard.alchemy.com), бесплатного тарифа хватает.
    2. *Apps → Create new app*, имя любое. Включи нужные сети (или все EVM).
    3. Скопируй **API Key** и вставь в панели: **Настройки → Alchemy API key → Сохранить**.
       Панель сама проверит, какие сети видит ключ, и выключит остальные.
-5. **Добавить** → вставь адреса (по одному на строку, можно с названием) или сид-фразы и приватные ключи
+2. **Добавить** → вставь адреса (по одному на строку, можно с названием) или сид-фразы и приватные ключи
    (по одной на строку; выбери, сколько аккаунтов брать с каждой сиды и путь: MetaMask/Rabby, Ledger Live, Legacy).
-6. Нажми **«Сканировать все»**. 1000 кошельков проверяются примерно за 3 минуты.
+3. Нажми **«Сканировать все»**. 1000 кошельков проверяются примерно за 3 минуты.
 
 Хочешь сначала посмотреть без ключа? `npm run demo:ru` откроет панель с демо-данными на http://127.0.0.1:4779/?lang=ru.
 
